@@ -12,7 +12,7 @@ ask = Ask(app, '/')
 
 
 @ask.intent('VerseIntent')
-def verse(book, chapter, verse):
+def verse_intent(book, chapter, verse):
     text = sefaria.get_verse(book, chapter, verse)
     return statement(text).simple_card('Hello', text)
 
