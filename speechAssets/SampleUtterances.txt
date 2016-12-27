@@ -1,4 +1,4 @@
-VerseIntent say {{book}} {{chapter}} {{verse}}
-VerseIntent get {{book}} {{chapter}} {{verse}}
-VerseIntent what is {{book}} {{chapter}} {{verse}}
-VerseIntent {{book}} {{chapter}} {{verse}}
+VerseIntent say {book} {chapter} {verse}
+VerseIntent get {book} {chapter} {verse}
+VerseIntent what is {book} {chapter} {verse}
+VerseIntent {book} {chapter} {verse}
