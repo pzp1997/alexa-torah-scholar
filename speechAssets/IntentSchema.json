@@ -1,0 +1,21 @@
+{
+  "intents": [
+    {
+      "intent": "VerseIntent",
+      "slots": [
+        {
+          "name": "book",
+          "type": "LIST_OF_BOOKS"
+        },
+        {
+          "name": "chapter",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "verse",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    }
+  ]
+}
