@@ -13,8 +13,15 @@ ask = Ask(app, '/')
 
 @ask.intent('VerseIntent')
 def verse_intent(book, chapter, verse):
-    text = sefaria.get_verse(book, chapter, verse)
-    return statement(text).simple_card('Hello', text)
+    api_resp = sefaria.get_verse(book, chapter, verse)
+    text, ref = api_resp['text'], api_resp['ref']
+
+    if text:
+        return statement(text).simple_card(ref, text)
+    else:
+        text = render_template('error')
+        return statement(text).simple_card(
+            'Error', 'Could not find {}.'.format(ref))
 
 
 @ask.launch
