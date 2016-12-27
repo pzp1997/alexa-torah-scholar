@@ -11,7 +11,7 @@ app = Flask(__name__)
 ask = Ask(app, '/')
 
 
-@ask.intent('VerseIntent')
+@ask.intent('VerseIntent', default={'chapter': '1', 'verse': '1'})
 def verse_intent(book, chapter, verse):
     api_resp = sefaria.get_verse(book, chapter, verse)
     text, ref = api_resp['text'], api_resp['ref']
