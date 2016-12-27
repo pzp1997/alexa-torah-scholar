@@ -19,9 +19,9 @@ def verse_intent(book, chapter, verse):
     if text:
         return statement(text).simple_card(ref, text)
     else:
-        text = render_template('error')
-        return statement(text).simple_card(
-            'Error', 'Could not find {}.'.format(ref))
+        ref = ref or 'text'
+        err_msg = render_template('error', ref=ref)
+        return statement(err_msg).simple_card('Error', err_msg)
 
 
 @ask.launch

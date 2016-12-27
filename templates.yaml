@@ -1,1 +1,2 @@
 launch: Please name a book, chapter, and verse.
+error: Could not find {{ ref }}.
