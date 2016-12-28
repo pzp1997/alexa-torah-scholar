@@ -18,7 +18,7 @@ def get_verse(book, chapter, verse):
 
     text = resp.get('text', '')
     if isinstance(text, (list, tuple)):
-        text = str(text[0]) if len(text) else ''
+        text = text[0] if len(text) else ''
 
     text = strip_tags(text).strip()
     text = ''.join(c for c in text if c.isalnum() or c == ' ')
