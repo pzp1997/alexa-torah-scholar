@@ -7,7 +7,8 @@ TEXT_ENDPOINT = SEFARIA_API_ROOT + 'texts/'
 
 
 def get_verse(book, chapter, verse):
-    text_ref = '.'.join((book.capitalize(), chapter, verse))
+    book = book.title().replace(' ', '_') if book else ''
+    text_ref = '.'.join((book, chapter, verse))
     resp = requests.get(TEXT_ENDPOINT + text_ref,
                         {'context': 0, 'commentary': 0}).json()
 
