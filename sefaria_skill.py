@@ -13,14 +13,16 @@ ask = Ask(app, '/')
 
 @ask.intent('VerseIntent', default={'chapter': '1', 'verse': '1'})
 def verse_intent(book, chapter, verse):
-    api_resp = sefaria.get_verse(book, chapter, verse)
-    text, ref = api_resp['text'], api_resp['ref']
+    text, ref = sefaria.get_verse(book, chapter, verse)
+
+    # DEBUG ONLY
+    print book, chapter, verse
+    print text
 
     if text:
         return statement(text).simple_card(ref, text)
     else:
-        ref = ref or 'text'
-        err_msg = render_template('error', ref=ref)
+        err_msg = render_template('error', ref=(ref or 'text'))
         return statement(err_msg).simple_card('Error', err_msg)
 
 
@@ -32,7 +34,7 @@ def launched():
 
 @ask.session_ended
 def session_ended():
-    return "", 200
+    return '', 200
 
 if __name__ == '__main__':
     app.run(debug=True)
