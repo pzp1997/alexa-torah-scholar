@@ -21,7 +21,7 @@ def get_verse(book, chapter, verse):
         text = text[0] if len(text) else ''
 
     text = strip_tags(text).strip()
-    text = ''.join(c for c in text if c.isalnum() or c == ' ')
+    # text = ''.join(c for c in text if c.isalnum() or c == ' ')
 
     return (text.encode('utf-8'), resp.get('ref', '').encode('utf-8'))
 
