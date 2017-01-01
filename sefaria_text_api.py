@@ -19,7 +19,7 @@ def get_verse(book, chapter, verse):
     if isinstance(text, (list, tuple)):
         text = text[0] if len(text) else ''
 
-    text = strip_tags(text).strip()
+    text = _strip_tags(text).strip()
     # text = ''.join(c for c in text if c.isalnum() or c == ' ')
 
     return (text.encode('utf-8'), resp.get('ref', '').encode('utf-8'))
@@ -43,7 +43,7 @@ class MLStripper(HTMLParser):
     def get_data(self):
         return ''.join(self.fed)
 
-def strip_tags(html):
+def _strip_tags(html):
     s = MLStripper()
     s.feed(html)
     return s.get_data()
