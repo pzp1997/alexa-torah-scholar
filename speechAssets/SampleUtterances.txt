@@ -1,8 +1,3 @@
-VerseIntent say {book} {chapter} {verse}
-VerseIntent get {book} {chapter} {verse}
-VerseIntent what is {book} {chapter} {verse}
-VerseIntent read {book} {chapter} {verse}
-VerseIntent {book} {chapter} {verse}
 VerseIntent say {book} chapter {chapter} verse {verse}
 VerseIntent get {book} chapter {chapter} verse {verse}
 VerseIntent what is {book} chapter {chapter} verse {verse}
