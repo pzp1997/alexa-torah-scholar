@@ -6,7 +6,7 @@ SEFARIA_API_ROOT = 'http://www.sefaria.org/api/'
 TEXT_ENDPOINT = SEFARIA_API_ROOT + 'texts/'
 
 
-def get_verse(book, chapter, verse):
+def get_text(book, chapter, verse=None):
     text_ref = _create_ref(book, chapter, verse)
 
     resp = requests.get(TEXT_ENDPOINT + text_ref,
@@ -14,7 +14,10 @@ def get_verse(book, chapter, verse):
 
     text = resp.get('text', '')
     if isinstance(text, (list, tuple)):
-        text = text[0] if len(text) else ''
+        if verse is None:
+            text = ' '.join(text)
+        else:
+            text = text[0] if len(text) else ''
 
     text = _strip_tags(text).strip()
     # text = ''.join(c for c in text if c.isalnum() or c == ' ')

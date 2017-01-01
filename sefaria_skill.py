@@ -16,7 +16,7 @@ def handle_verse_intent(book, chapter, verse):
     # DEBUG ONLY
     print book, chapter, verse
 
-    text, ref = sefaria.get_verse(book, chapter, verse)
+    text, ref = sefaria.get_text(book, chapter, verse)
 
     # DEBUG ONLY
     print text
