@@ -2,8 +2,8 @@ from flask import Flask
 from flask import render_template
 
 from flask_ask import Ask
-from flask_ask import statement
 from flask_ask import question
+from flask_ask import statement
 
 import sefaria_text_api as sefaria
 
