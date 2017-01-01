@@ -13,3 +13,14 @@ VerseIntent get {book} {chapter} verse {verse}
 VerseIntent what is {book} {chapter} verse {verse}
 VerseIntent read {book} {chapter} verse {verse}
 VerseIntent {book} {chapter} verse {verse}
+
+ChapterIntent say {book} {chapter}
+ChapterIntent get {book} {chapter}
+ChapterIntent what is {book} {chapter}
+ChapterIntent read {book} {chapter}
+ChapterIntent {book} {chapter}
+ChapterIntent say {book} chapter {chapter}
+ChapterIntent get {book} chapter {chapter}
+ChapterIntent what is {book} chapter {chapter}
+ChapterIntent read {book} chapter {chapter}
+ChapterIntent {book} chapter {chapter}
