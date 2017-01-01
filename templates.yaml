@@ -1,2 +1,2 @@
-launch: Please name a book, chapter, and verse.
+launch: Please name a book, chapter, and optionally a verse.
 error: Could not find {{ ref }}.
