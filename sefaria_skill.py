@@ -24,6 +24,12 @@ def handle_verse_intent(book, chapter, verse):
     return _build_text_response(text, ref)
 
 
+@ask.intent('ChapterIntent', default={'chapter': '1'})
+def handle_chapter_intent(book, chapter):
+    text, ref = sefaria.get_text(book, chapter)
+    return _build_text_response(text, ref)
+
+
 @ask.launch
 def launched():
     text = render_template('launch')
