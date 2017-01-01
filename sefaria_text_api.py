@@ -7,8 +7,7 @@ TEXT_ENDPOINT = SEFARIA_API_ROOT + 'texts/'
 
 
 def get_verse(book, chapter, verse):
-    book = book.title().replace(' ', '_') if book else ''
-    text_ref = '.'.join((book, chapter, verse))
+    text_ref = _create_ref(book, chapter, verse)
 
     # DEBUG ONLY
     print text_ref
@@ -24,6 +23,11 @@ def get_verse(book, chapter, verse):
     # text = ''.join(c for c in text if c.isalnum() or c == ' ')
 
     return (text.encode('utf-8'), resp.get('ref', '').encode('utf-8'))
+
+
+def _create_ref(book, chapter, verse):
+    book = book.title().replace(' ', '_') if book else ''
+    return '.'.join((book, chapter) + (() if verse is None else (verse,)))
 
 
 # Strips HTML tags from a string
