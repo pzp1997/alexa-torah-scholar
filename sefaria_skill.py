@@ -12,7 +12,7 @@ ask = Ask(app, '/')
 
 
 @ask.intent('VerseIntent', default={'chapter': '1', 'verse': '1'})
-def verse_intent(book, chapter, verse):
+def handle_verse_intent(book, chapter, verse):
     # DEBUG ONLY
     print book, chapter, verse
 
