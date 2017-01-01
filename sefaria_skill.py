@@ -21,11 +21,7 @@ def handle_verse_intent(book, chapter, verse):
     # DEBUG ONLY
     print text
 
-    if text:
-        return statement(text).simple_card(ref, text)
-    else:
-        err_msg = render_template('error', ref=(ref or 'text'))
-        return statement(err_msg).simple_card('Error', err_msg)
+    return _build_text_response(text, ref)
 
 
 @ask.launch
@@ -37,6 +33,14 @@ def launched():
 @ask.session_ended
 def session_ended():
     return '', 200
+
+
+def _build_text_response(text, ref):
+    if text:
+        return statement(text).simple_card(ref, text)
+    else:
+        err_msg = render_template('error', ref=(ref or 'text'))
+        return statement(err_msg).simple_card('Error', err_msg)
 
 if __name__ == '__main__':
     app.run(debug=True)
