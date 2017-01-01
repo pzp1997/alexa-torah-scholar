@@ -16,6 +16,19 @@
           "type": "AMAZON.NUMBER"
         }
       ]
+    },
+    {
+      "intent": "ChapterIntent",
+      "slots": [
+        {
+          "name": "book",
+          "type": "LIST_OF_BOOKS"
+        },
+        {
+          "name": "chapter",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
     }
   ]
 }
