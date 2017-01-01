@@ -9,9 +9,6 @@ TEXT_ENDPOINT = SEFARIA_API_ROOT + 'texts/'
 def get_verse(book, chapter, verse):
     text_ref = _create_ref(book, chapter, verse)
 
-    # DEBUG ONLY
-    print text_ref
-
     resp = requests.get(TEXT_ENDPOINT + text_ref,
                         {'context': 0, 'commentary': 0}).json()
 
