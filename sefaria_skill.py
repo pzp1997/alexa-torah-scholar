@@ -43,9 +43,13 @@ def session_ended():
 
 def _build_text_response(text, ref):
     if text:
-        return statement(text).simple_card(ref, text)
+        card_text = (text[:137] + '...' if len(text) > 140 else text)
+        speech_text = '{}{}{}'.format(ref, '. ' if ref else '', text)
+        card_title = 'Sefaria{}{}'.format(' - ' if ref else '', ref)
+        return statement(speech_text).simple_card(card_title, card_text)
     else:
-        err_msg = render_template('error', ref=(ref or 'text'))
+        ref = ref or 'text'
+        err_msg = render_template('error', ref=ref)
         return statement(err_msg).simple_card('Error', err_msg)
 
 if __name__ == '__main__':
