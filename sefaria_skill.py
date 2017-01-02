@@ -26,6 +26,9 @@ def handle_verse_intent(book, chapter, verse):
 
 @ask.intent('ChapterIntent', default={'chapter': '1'})
 def handle_chapter_intent(book, chapter):
+    # DEBUG ONLY
+    print book, chapter
+
     text, ref = sefaria.get_text(book, chapter)
     return _build_text_response(text, ref)
 
