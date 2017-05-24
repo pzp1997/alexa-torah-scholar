@@ -1,4 +1,3 @@
-import logging
 
 from flask import Flask
 from flask import render_template
@@ -11,28 +10,27 @@ import sefaria_text_api as sefaria
 app = Flask(__name__)
 ask = Ask(app, '/')
 
-
 @ask.intent('VerseIntent', default={'chapter': '1', 'verse': '1'})
 def handle_verse_intent(book, chapter, verse):
-    logging.info('VerseIntent for %s %d:%d', book, chapter, verse)
+    app.logger.info('VerseIntent for %s %s:%s', book, chapter, verse)
     text, ref = sefaria.get_text(book, chapter, verse, verse)
-    logging.debug(text)
+    app.logger.debug(text)
     return _build_text_response(text, ref)
 
 
 @ask.intent('ChapterIntent', default={'chapter': '1'})
 def handle_chapter_intent(book, chapter):
-    logging.info('ChapterIntent for %s %d', book, chapter)
+    app.logger.info('ChapterIntent for %s %s', book, chapter)
     text, ref = sefaria.get_text(book, chapter)
-    logging.debug(text)
+    app.logger.debug(text)
     return _build_text_response(text, ref)
 
 
 @ask.intent('VerseRangeIntent', default={'chapter': '1', 'start_verse': '1', 'end_verse': '1'})
 def handle_verse_range_intent(book, chapter, start_verse, end_verse):
-    logging.info('VerseRangeIntent for %s %d:%d-%d', book, chapter, start_verse, end_verse)
+    app.logger.info('VerseRangeIntent for %s %s:%s-%s', book, chapter, start_verse, end_verse)
     text, ref = sefaria.get_text(book, chapter, start_verse, end_verse)
-    logging.debug(text)
+    app.logger.debug(text)
     return _build_text_response(text, ref)
 
 
