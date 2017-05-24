@@ -20,13 +20,13 @@ ChapterIntent what is {book} chapter {chapter}
 ChapterIntent read {book} chapter {chapter}
 ChapterIntent {book} chapter {chapter}
 
-VerseRangeIntent say {book} {chapter} verses {start_verse} to {end_verse}
-VerseRangeIntent get {book} {chapter} verses {start_verse} to {end_verse}
-VerseRangeIntent what is {book} {chapter} verses {start_verse} to {end_verse}
-VerseRangeIntent read {book} {chapter} verses {start_verse} to {end_verse}
-VerseRangeIntent {book} {chapter} verses {start_verse} to {end_verse}
-VerseRangeIntent say {book} chapter {chapter} verses {start_verse} to {end_verse}
-VerseRangeIntent get {book} chapter {chapter} verses {start_verse} to {end_verse}
-VerseRangeIntent what is {book} chapter {chapter} verses {start_verse} to {end_verse}
-VerseRangeIntent read {book} chapter {chapter} verses {start_verse} to {end_verse}
-VerseRangeIntent {book} chapter {chapter} verses {start_verse} to {end_verse}
+VerseRangeIntent say {book} {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent get {book} {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent what is {book} {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent read {book} {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent {book} {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent say {book} chapter {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent get {book} chapter {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent what is {book} chapter {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent read {book} chapter {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent {book} chapter {chapter} verses {start_verse} through {end_verse}
