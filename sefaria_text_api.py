@@ -6,18 +6,19 @@ SEFARIA_API_ROOT = 'http://www.sefaria.org/api/'
 TEXT_ENDPOINT = SEFARIA_API_ROOT + 'texts/'
 
 
-def get_text(book, chapter, verse=None):
-    text_ref = _create_ref(book, chapter, verse)
+def get_text(book, chapter, start_verse=None, end_verse=None):
+    text_ref = _create_ref(book, chapter, start_verse, end_verse)
 
     resp = requests.get(TEXT_ENDPOINT + text_ref,
                         {'context': 0, 'commentary': 0}).json()
 
     text = resp.get('text', '')
+
     if isinstance(text, (list, tuple)):
-        if verse is None:
-            text = ' '.join(text)
-        else:
+        if (start_verse is None) ^ (end_verse is None):
             text = text[0] if len(text) else ''
+        else:
+            text = ' '.join(text)
 
     text = _strip_tags(text).strip()
     # text = ''.join(c for c in text if c.isalnum() or c == ' ')
@@ -25,9 +26,13 @@ def get_text(book, chapter, verse=None):
     return (text.encode('utf-8'), resp.get('ref', '').encode('utf-8'))
 
 
-def _create_ref(book, chapter, verse):
+def _create_ref(book, chapter, start_verse, end_verse):
     book = book.title().replace(' ', '_') if book else ''
-    return '.'.join((book, chapter) + (() if verse is None else (verse,)))
+    if start_verse is None:
+        return '{}.{}'.format(book, chapter)
+    if end_verse is None:
+        return '{}.{}.{}'.format(book, chapter, start_verse)
+    return '{}.{}.{}-{}'.format(book, chapter, start_verse, end_verse)
 
 
 # Strips HTML tags from a string
