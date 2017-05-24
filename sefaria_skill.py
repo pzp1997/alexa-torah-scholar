@@ -54,7 +54,7 @@ def _build_text_response(text, ref):
         card_title = 'Sefaria{}{}'.format(' - ' if ref else '', ref)
         return statement(speech_text).simple_card(card_title, card_text)
     else:
-        ref = ref or 'text'
+        ref = ref or 'the text'
         err_msg = render_template('error', ref=ref)
         return statement(err_msg).simple_card('Error', err_msg)
 
