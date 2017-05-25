@@ -18,6 +18,28 @@ def get_text(text_ref):
     return (text.encode('utf-8'), resp.get('ref', '').encode('utf-8'))
 
 
+def get_commentary(text_ref):
+    resp = requests.get(TEXT_ENDPOINT + text_ref, {'context': 0}).json()
+
+    links = resp.get('commentary', [])
+    commentaries = []
+    for link in links:
+        ref, text, type_ = _entrygetter('ref', 'text', 'type')(link)
+        if ref and text and type_ == 'commentary':
+            commentaries.append(ref)
+
+    return (commentaries, resp.get('ref', '').encode('utf-8'))
+
+
+def _entrygetter(*keys):
+    if len(keys) < 1:
+        raise TypeError('entrygetter expected 1 arguments, got 0')
+
+    def entrygetter_inner(d, default=None):
+        return tuple(d.get(key, default) for key in keys)
+    return entrygetter_inner
+
+
 def create_ref(book, chapter, start_verse=None, end_verse=None):
     book = book.title().replace(' ', '_') if book else ''
     if start_verse is None:
