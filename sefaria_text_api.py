@@ -11,13 +11,8 @@ def get_text(text_ref):
                         {'context': 0, 'commentary': 0}).json()
 
     text = resp.get('text', '')
-
     if isinstance(text, (list, tuple)):
-        if (start_verse is None) ^ (end_verse is None):
-            text = text[0] if len(text) else ''
-        else:
-            text = ' '.join(text)
-
+        text = ' '.join(text)
     text = _strip_tags(text).strip()
 
     return (text.encode('utf-8'), resp.get('ref', '').encode('utf-8'))
