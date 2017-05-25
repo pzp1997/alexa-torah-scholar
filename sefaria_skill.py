@@ -38,6 +38,36 @@ def handle_text_request(book, chapter, start_verse, end_verse):
     return _build_text_response(text, ref)
 
 
+@ask.intent('CommentaryIntent', default={'chapter': '1', 'verse': '1'})
+def handle_commentary_intent(book, chapter, verse):
+    session.attributes['last_intent'] = 'CommentaryIntent'
+    app.logger.info('CommentaryIntent: %s %s %s', book, chapter, verse)
+
+    ref = create_ref(book, chapter, verse)
+    commentary_refs, ref = get_commentary(ref)
+    app.logger.debug(commentary_refs)
+
+    session.attributes['commentaries'] = commentary_refs
+    return _build_commentary_response(commentary_refs, ref)
+
+
+@ask.intent('CommentarySelectionIntent', convert={'commentary_number': int})
+def handle_commentary_selection_intent(commentary_number):
+    session.attributes['last_intent'] = 'CommentarySelectionIntent'
+    app.logger.info('Commentary Selection: %d', commentary_number)
+
+    commentaries = session.attributes.get('commentaries')
+    if not commentaries:
+        err_msg = render_template('error', ref='any commentaries')
+        return statement(err_msg).simple_card('Error', err_msg)
+
+    if ('commentary_number' in convert_errors or
+            commentary_number < 1 or commentary_number > len(commentaries)):
+        speech_text = render_template('commentary_reprompt',
+                                      number=len(commentaries))
+        return question(speech_text)
+
+    text, ref = get_text(commentaries[commentary_number - 1])
     app.logger.debug(text)
 
     return _build_text_response(text, ref)
@@ -63,6 +93,33 @@ def _build_text_response(text, ref):
     else:
         err_msg = render_template('error', ref=(ref or 'the text'))
         return statement(err_msg).simple_card('Error', err_msg)
+
+
+def _build_commentary_response(commentaries, ref):
+    if commentaries:
+        num_commentaries = len(commentaries)
+
+        if num_commentaries == 1:
+            text, ref = get_text(commentaries[0])
+            app.logger.debug(text)
+            return _build_text_response(text, ref)
+
+        speech_text = render_template(
+            'commentary', number=num_commentaries, ref=ref,
+            titles=', '.join('{}. {}'.format(i, ref) for i, ref
+                             in enumerate(commentaries, start=1)))
+
+        reprompt_text = render_template('commentary_reprompt',
+                                        number=num_commentaries)
+
+        return question(speech_text).reprompt(reprompt_text)
+    else:
+        if ref:
+            err_msg = render_template('commentary_none', ref=ref)
+            return statement(err_msg)
+        else:
+            err_msg = render_template('error', ref='the text')
+            return statement(err_msg).simple_card('Error', err_msg)
 
 
 if __name__ == '__main__':
