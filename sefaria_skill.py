@@ -1,11 +1,7 @@
+from flask import Flask, render_template
+from flask_ask import Ask, convert_errors, question, session, statement
 
-from flask import Flask
-from flask import render_template
-from flask_ask import Ask
-from flask_ask import question
-from flask_ask import statement
-
-import sefaria_text_api as sefaria
+from sefaria_api import create_ref, get_commentary, get_text
 
 app = Flask(__name__)
 ask = Ask(app, '/')
