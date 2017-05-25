@@ -6,9 +6,7 @@ SEFARIA_API_ROOT = 'http://www.sefaria.org/api/'
 TEXT_ENDPOINT = SEFARIA_API_ROOT + 'texts/'
 
 
-def get_text(book, chapter, start_verse=None, end_verse=None):
-    text_ref = _create_ref(book, chapter, start_verse, end_verse)
-
+def get_text(text_ref):
     resp = requests.get(TEXT_ENDPOINT + text_ref,
                         {'context': 0, 'commentary': 0}).json()
 
@@ -21,12 +19,11 @@ def get_text(book, chapter, start_verse=None, end_verse=None):
             text = ' '.join(text)
 
     text = _strip_tags(text).strip()
-    # text = ''.join(c for c in text if c.isalnum() or c == ' ')
 
     return (text.encode('utf-8'), resp.get('ref', '').encode('utf-8'))
 
 
-def _create_ref(book, chapter, start_verse, end_verse):
+def create_ref(book, chapter, start_verse=None, end_verse=None):
     book = book.title().replace(' ', '_') if book else ''
     if start_verse is None:
         return '{}.{}'.format(book, chapter)
