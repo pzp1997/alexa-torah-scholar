@@ -2,33 +2,39 @@ VerseIntent say {book} chapter {chapter} verse {verse}
 VerseIntent get {book} chapter {chapter} verse {verse}
 VerseIntent what is {book} chapter {chapter} verse {verse}
 VerseIntent read {book} chapter {chapter} verse {verse}
+VerseIntent for {book} chapter {chapter} verse {verse}
 VerseIntent {book} chapter {chapter} verse {verse}
 VerseIntent say {book} {chapter} verse {verse}
 VerseIntent get {book} {chapter} verse {verse}
 VerseIntent what is {book} {chapter} verse {verse}
 VerseIntent read {book} {chapter} verse {verse}
+VerseIntent for {book} {chapter} verse {verse}
 VerseIntent {book} {chapter} verse {verse}
 
 ChapterIntent say {book} {chapter}
 ChapterIntent get {book} {chapter}
 ChapterIntent what is {book} {chapter}
 ChapterIntent read {book} {chapter}
+ChapterIntent for {book} {chapter}
 ChapterIntent {book} {chapter}
 ChapterIntent say {book} chapter {chapter}
 ChapterIntent get {book} chapter {chapter}
 ChapterIntent what is {book} chapter {chapter}
 ChapterIntent read {book} chapter {chapter}
+ChapterIntent for {book} chapter {chapter}
 ChapterIntent {book} chapter {chapter}
 
 VerseRangeIntent say {book} {chapter} verses {start_verse} through {end_verse}
 VerseRangeIntent get {book} {chapter} verses {start_verse} through {end_verse}
 VerseRangeIntent what is {book} {chapter} verses {start_verse} through {end_verse}
 VerseRangeIntent read {book} {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent for {book} {chapter} verses {start_verse} through {end_verse}
 VerseRangeIntent {book} {chapter} verses {start_verse} through {end_verse}
 VerseRangeIntent say {book} chapter {chapter} verses {start_verse} through {end_verse}
 VerseRangeIntent get {book} chapter {chapter} verses {start_verse} through {end_verse}
 VerseRangeIntent what is {book} chapter {chapter} verses {start_verse} through {end_verse}
 VerseRangeIntent read {book} chapter {chapter} verses {start_verse} through {end_verse}
+VerseRangeIntent for {book} chapter {chapter} verses {start_verse} through {end_verse}
 VerseRangeIntent {book} chapter {chapter} verses {start_verse} through {end_verse}
 
 CommentaryIntent are there any commentaries for {book} chapter {chapter} verse {verse}
