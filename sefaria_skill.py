@@ -11,14 +11,16 @@ ask = Ask(app, '/')
 def handle_chapter_intent(book, chapter):
     session.attributes['last_intent'] = 'ChapterIntent'
     app.logger.info('ChapterIntent: %s %s', book, chapter)
-    return handle_text_request(book, chapter, None, None)
+    text, ref = handle_text_request(book, chapter, None, None)
+    return _build_text_response(text, ref)
 
 
 @ask.intent('VerseIntent')
 def handle_verse_intent(book, chapter, verse):
     session.attributes['last_intent'] = 'VerseIntent'
     app.logger.info('VerseIntent: %s %s %s', book, chapter, verse)
-    return handle_text_request(book, chapter, verse, None)
+    text, ref = handle_text_request(book, chapter, verse, None)
+    return _build_verse_response(text, ref)
 
 
 @ask.intent('VerseRangeIntent')
@@ -26,16 +28,17 @@ def handle_verse_range_intent(book, chapter, start_verse, end_verse):
     session.attributes['last_intent'] = 'VerseRangeIntent'
     app.logger.info('VerseRangeIntent: %s %s %s %s',
                     book, chapter, start_verse, end_verse)
-    return handle_text_request(book, chapter, start_verse, end_verse)
+    text, ref = handle_text_request(book, chapter, start_verse, end_verse)
+    return _build_verse_response(text, ref)
 
 
 def handle_text_request(book, chapter, start_verse, end_verse):
-    ref = create_ref(book, chapter, start_verse, end_verse)
+    text_request = (book, chapter, start_verse, end_verse)
+    session.attributes['last_ref'] = text_request
+    ref = create_ref(*text_request)
     text, ref = get_text(ref)
     app.logger.debug(text)
-
-    session.attributes['last_ref'] = ref
-    return _build_text_response(text, ref)
+    return text, ref
 
 
 @ask.intent('CommentaryIntent', default={'chapter': '1', 'verse': '1'})
