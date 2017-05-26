@@ -52,7 +52,7 @@ def handle_commentary_intent(book, chapter, verse):
 @ask.intent('CommentarySelectionIntent', convert={'commentary_number': int})
 def handle_commentary_selection_intent(commentary_number):
     session.attributes['last_intent'] = 'CommentarySelectionIntent'
-    app.logger.info('Commentary Selection: %d', commentary_number)
+    app.logger.info('CommentarySelectionIntent: %s', commentary_number)
 
     commentaries = session.attributes.get('commentaries')
     if not commentaries:
