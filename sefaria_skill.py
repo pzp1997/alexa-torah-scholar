@@ -13,7 +13,7 @@ ask = Ask(app, '/')
 def handle_chapter_intent(book, chapter):
     session.attributes['last_intent'] = 'ChapterIntent'
     app.logger.info('ChapterIntent: %s %s', book, chapter)
-    text, ref = handle_text_request(book, chapter, None, None)
+    text, ref = _text_request_helper(book, chapter, None, None)
     return _build_text_response(text, ref)
 
 
@@ -21,7 +21,7 @@ def handle_chapter_intent(book, chapter):
 def handle_verse_intent(book, chapter, verse):
     session.attributes['last_intent'] = 'VerseIntent'
     app.logger.info('VerseIntent: %s %s %s', book, chapter, verse)
-    text, ref = handle_text_request(book, chapter, verse, None)
+    text, ref = _text_request_helper(book, chapter, verse, None)
     return _build_verse_response(text, ref)
 
 
@@ -30,17 +30,8 @@ def handle_verse_range_intent(book, chapter, start_verse, end_verse):
     session.attributes['last_intent'] = 'VerseRangeIntent'
     app.logger.info('VerseRangeIntent: %s %s %s %s',
                     book, chapter, start_verse, end_verse)
-    text, ref = handle_text_request(book, chapter, start_verse, end_verse)
+    text, ref = _text_request_helper(book, chapter, start_verse, end_verse)
     return _build_verse_response(text, ref)
-
-
-def handle_text_request(book, chapter, start_verse, end_verse):
-    text_request = (book, chapter, start_verse, end_verse)
-    session.attributes['last_ref'] = text_request
-    ref = create_ref(*text_request)
-    text, ref = get_text(ref)
-    app.logger.debug(text)
-    return text, ref
 
 
 @ask.intent('VerseExtraIntent')
@@ -60,7 +51,7 @@ def handle_verse_extra_intent(extra_option):
         return _build_text_response(text, ref)
     elif extra_option == 'commentary':
         ref = create_ref(*last_ref)
-        return _commentary_helper(ref)
+        return _commentary_request_helper(ref)
     elif extra_option == 'no':
         return statement('Okay.')
     else:
@@ -74,7 +65,7 @@ def handle_commentary_intent(book, chapter, verse):
     session.attributes['last_intent'] = 'CommentaryIntent'
     app.logger.info('CommentaryIntent: %s %s %s', book, chapter, verse)
     ref = create_ref(book, chapter, verse)
-    return _commentary_helper(ref)
+    return _commentary_request_helper(ref)
 
 
 @ask.intent('CommentarySelectionIntent', convert={'commentary_number': int})
@@ -109,7 +100,16 @@ def session_ended():
     return '', 200
 
 
-def _commentary_helper(text_ref):
+def _text_request_helper(book, chapter, start_verse, end_verse):
+    text_request = (book, chapter, start_verse, end_verse)
+    session.attributes['last_ref'] = text_request
+    ref = create_ref(*text_request)
+    text, ref = get_text(ref)
+    app.logger.debug(text)
+    return text, ref
+
+
+def _commentary_request_helper(text_ref):
     commentary_refs, ref = get_commentary(text_ref)
     app.logger.debug(commentary_refs)
     session.attributes['commentaries'] = commentary_refs
