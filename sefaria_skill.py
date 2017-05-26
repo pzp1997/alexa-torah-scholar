@@ -41,7 +41,7 @@ def handle_text_request(book, chapter, start_verse, end_verse):
     return text, ref
 
 
-@ask.intent('CommentaryIntent', default={'chapter': '1', 'verse': '1'})
+@ask.intent('CommentaryIntent', default={'chapter': None, 'verse': None})
 def handle_commentary_intent(book, chapter, verse):
     session.attributes['last_intent'] = 'CommentaryIntent'
     app.logger.info('CommentaryIntent: %s %s %s', book, chapter, verse)
