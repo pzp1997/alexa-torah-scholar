@@ -45,13 +45,8 @@ def handle_text_request(book, chapter, start_verse, end_verse):
 def handle_commentary_intent(book, chapter, verse):
     session.attributes['last_intent'] = 'CommentaryIntent'
     app.logger.info('CommentaryIntent: %s %s %s', book, chapter, verse)
-
     ref = create_ref(book, chapter, verse)
-    commentary_refs, ref = get_commentary(ref)
-    app.logger.debug(commentary_refs)
-
-    session.attributes['commentaries'] = commentary_refs
-    return _build_commentary_response(commentary_refs, ref)
+    return _commentary_helper(ref)
 
 
 @ask.intent('CommentarySelectionIntent', convert={'commentary_number': int})
@@ -84,6 +79,13 @@ def launched():
 @ask.session_ended
 def session_ended():
     return '', 200
+
+
+def _commentary_helper(text_ref):
+    commentary_refs, ref = get_commentary(text_ref)
+    app.logger.debug(commentary_refs)
+    session.attributes['commentaries'] = commentary_refs
+    return _build_commentary_response(commentary_refs, ref)
 
 
 def _build_text_response(text, ref):
