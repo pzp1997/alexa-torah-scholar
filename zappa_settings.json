@@ -2,5 +2,9 @@
     "dev": {
         "app_function": "sefaria_skill.app",
         "s3_bucket": "alexa-sefaria-dev"
+    },
+    "production": {
+        "app_function": "sefaria_skill.app",
+        "s3_bucket": "alexa-sefaria-production"
     }
 }

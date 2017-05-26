@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template
 from flask_ask import Ask, convert_errors, question, session, statement
 
@@ -172,4 +174,7 @@ def _build_could_not_find_response(resource):
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.config['ASK_APPLICATION_ID'] = (
+        'amzn1.ask.skill.2d2d7cbf-b264-4a86-82c0-c7534bbaa602')
+    debug = os.environ.get('STAGE', '') == 'dev'
+    app.run(debug=debug)
