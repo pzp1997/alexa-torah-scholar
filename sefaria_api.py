@@ -40,12 +40,32 @@ def _entrygetter(*keys):
     return entrygetter_inner
 
 
-def create_ref(book, chapter, start_verse=None, end_verse=None):
+def create_ref(book, chapter, start_verse=None, end_verse=None, context=0):
     book = book.title().replace(' ', '_') if book else ''
+
     if start_verse is None:
         return '{}.{}'.format(book, chapter)
+
+    if context > 0:
+        try:
+            start_verse_int = int(start_verse)
+        except ValueError:
+            pass
+        else:
+            start_verse = str(max(start_verse_int - context, 1))
+            if end_verse is None:
+                end_verse = str(start_verse_int + context)
+            else:
+                try:
+                    end_verse_int = int(end_verse)
+                except ValueError:
+                    pass
+                else:
+                    end_verse = str(end_verse_int + context)
+
     if end_verse is None:
         return '{}.{}.{}'.format(book, chapter, start_verse)
+
     return '{}.{}.{}-{}'.format(book, chapter, start_verse, end_verse)
 
 
