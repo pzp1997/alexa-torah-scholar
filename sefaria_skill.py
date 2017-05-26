@@ -90,7 +90,7 @@ def _commentary_helper(text_ref):
 
 def _build_text_response(text, ref):
     if text:
-        card_text = (text[:137] + '...' if len(text) > 140 else text)
+        card_text = (text[:1997] + '...' if len(text) > 2000 else text)
         speech_text = '{}{}{}'.format(ref, '. ' if ref else '', text)
         card_title = 'Sefaria{}{}'.format(' - ' if ref else '', ref)
         return statement(speech_text).simple_card(card_title, card_text)
