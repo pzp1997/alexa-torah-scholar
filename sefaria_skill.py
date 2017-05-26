@@ -61,8 +61,7 @@ def handle_commentary_selection_intent(commentary_number):
 
     commentaries = session.attributes.get('commentaries')
     if not commentaries:
-        err_msg = render_template('error', ref='any commentaries')
-        return statement(err_msg).simple_card('Error', err_msg)
+        return _build_could_not_find_response('any commentaries')
 
     if ('commentary_number' in convert_errors or
             commentary_number < 1 or commentary_number > len(commentaries)):
@@ -94,8 +93,7 @@ def _build_text_response(text, ref):
         card_title = 'Sefaria{}{}'.format(' - ' if ref else '', ref)
         return statement(speech_text).simple_card(card_title, card_text)
     else:
-        err_msg = render_template('error', ref=(ref or 'the text'))
-        return statement(err_msg).simple_card('Error', err_msg)
+        return _build_could_not_find_response(ref or 'the text')
 
 
 def _build_commentary_response(commentaries, ref):
@@ -121,8 +119,12 @@ def _build_commentary_response(commentaries, ref):
             err_msg = render_template('commentary_none', ref=ref)
             return statement(err_msg)
         else:
-            err_msg = render_template('error', ref='the text')
-            return statement(err_msg).simple_card('Error', err_msg)
+            return _build_could_not_find_response('the text')
+
+
+def _build_could_not_find_response(resource):
+    err_msg = render_template('error', ref=resource)
+    return statement(err_msg)
 
 
 if __name__ == '__main__':
