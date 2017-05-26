@@ -89,6 +89,13 @@ def handle_commentary_selection_intent(commentary_number):
     return _build_text_response(text, ref)
 
 
+@ask.intent('AMAZON.CancelIntent')
+@ask.intent('AMAZON.StopIntent')
+def handle_cancel_stop():
+    return statement('Okay.')
+
+
+@ask.intent('AMAZON.HelpIntent')
 @ask.launch
 def launched():
     text = render_template('launch')
