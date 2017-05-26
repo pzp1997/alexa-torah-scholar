@@ -1,6 +1,19 @@
 {
   "intents": [
     {
+      "intent": "ChapterIntent",
+      "slots": [
+        {
+          "name": "book",
+          "type": "LIST_OF_BOOKS"
+        },
+        {
+          "name": "chapter",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
       "intent": "VerseIntent",
       "slots": [
         {
@@ -13,19 +26,6 @@
         },
         {
           "name": "verse",
-          "type": "AMAZON.NUMBER"
-        }
-      ]
-    },
-    {
-      "intent": "ChapterIntent",
-      "slots": [
-        {
-          "name": "book",
-          "type": "LIST_OF_BOOKS"
-        },
-        {
-          "name": "chapter",
           "type": "AMAZON.NUMBER"
         }
       ]
@@ -52,6 +52,15 @@
       ]
     },
     {
+      "intent": "VerseExtraIntent",
+      "slots": [
+        {
+          "name": "extra_option",
+          "type": "VERSE_EXTRA_OPTION"
+        }
+      ]
+    },
+    {
       "intent": "CommentaryIntent",
       "slots": [
         {
@@ -74,15 +83,6 @@
         {
           "name": "commentary_number",
           "type": "AMAZON.NUMBER"
-        }
-      ]
-    },
-    {
-      "intent": "VerseExtraIntent",
-      "slots": [
-        {
-          "name": "extra_option",
-          "type": "VERSE_EXTRA_OPTION"
         }
       ]
     }
