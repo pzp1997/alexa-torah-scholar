@@ -41,6 +41,32 @@ def handle_text_request(book, chapter, start_verse, end_verse):
     return text, ref
 
 
+@ask.intent('VerseExtraIntent')
+def handle_verse_extra_intent(extra_option):
+    session.attributes['last_intent'] = 'VerseExtraIntent'
+    last_ref = session.attributes.get('last_ref', tuple())
+    app.logger.info('VerseExtraIntent: %s, %s',
+                    extra_option, last_ref)
+
+    if not last_ref:
+        return _build_could_not_find_response('context or commentary')
+
+    if extra_option == 'context':
+        ref = create_ref(*last_ref, context=3)
+        text, ref = get_text(ref)
+        app.logger.debug(text)
+        return _build_text_response(text, ref)
+    elif extra_option == 'commentary':
+        ref = create_ref(*last_ref)
+        return _commentary_helper(ref)
+    elif extra_option == 'no':
+        return statement('Okay.')
+    else:
+        speech_text = render_template('verse_extra_error')
+        reprompt_text = render_template('verse_extra', ref='this verse')
+        return question(speech_text).reprompt(reprompt_text)
+
+
 @ask.intent('CommentaryIntent', default={'chapter': None, 'verse': None})
 def handle_commentary_intent(book, chapter, verse):
     session.attributes['last_intent'] = 'CommentaryIntent'
