@@ -172,4 +172,4 @@ def _build_could_not_find_response(resource):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
