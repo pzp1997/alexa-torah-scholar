@@ -57,3 +57,7 @@ CommentaryIntent for commentary on {book} {chapter} verse {verse}
 CommentarySelectionIntent commentary number {commentary_number}
 CommentarySelectionIntent number {commentary_number}
 CommentarySelectionIntent {commentary_number}
+
+VerseExtraIntent {extra_option}
+VerseExtraIntent get the {extra_option}
+VerseExtraIntent show me {extra_option}

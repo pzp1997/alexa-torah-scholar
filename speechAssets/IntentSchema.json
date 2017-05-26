@@ -76,6 +76,15 @@
           "type": "AMAZON.NUMBER"
         }
       ]
+    },
+    {
+      "intent": "VerseExtraIntent",
+      "slots": [
+        {
+          "name": "extra_option",
+          "type": "VERSE_EXTRA_OPTION"
+        }
+      ]
     }
   ]
 }
