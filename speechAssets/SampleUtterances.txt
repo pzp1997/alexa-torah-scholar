@@ -58,6 +58,23 @@ CommentaryIntent show me the commentary for {book} {chapter} verse {verse}
 CommentaryIntent what is the commentary for {book} {chapter} verse {verse}
 CommentaryIntent for commentary on {book} {chapter} verse {verse}
 
+CommentaryRangeIntent are there any commentaries for {book} chapter {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent show me the commentaries for {book} chapter {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent what are the commentaries for {book} chapter {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent for commentaries on {book} chapter {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent are there any commentaries for {book} {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent show me the commentaries for {book} {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent what are the commentaries for {book} {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent for commentaries on {book} {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent is there any commentary for {book} chapter {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent show me the commentary for {book} chapter {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent what is the commentary for {book} chapter {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent for commentary on {book} chapter {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent is there any commentary for {book} {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent show me the commentary for {book} {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent what is the commentary for {book} {chapter} verses {start_verse} through {end_verse}
+CommentaryRangeIntent for commentary on {book} {chapter} verses {start_verse} through {end_verse}
+
 CommentarySelectionIntent commentary number {commentary_number}
 CommentarySelectionIntent commentary {commentary_number}
 CommentarySelectionIntent number {commentary_number}

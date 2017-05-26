@@ -78,6 +78,27 @@
       ]
     },
     {
+      "intent": "CommentaryRangeIntent",
+      "slots": [
+        {
+          "name": "book",
+          "type": "LIST_OF_BOOKS"
+        },
+        {
+          "name": "chapter",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "start_verse",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "end_verse",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
       "intent": "CommentarySelectionIntent",
       "slots": [
         {
