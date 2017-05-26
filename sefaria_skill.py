@@ -98,6 +98,22 @@ def _build_text_response(text, ref):
         return _build_could_not_find_response(ref or 'the text')
 
 
+def _build_verse_response(text, ref):
+    if text:
+        if ref:
+            speech_text = render_template(
+                'verse_extra', text=text.decode('utf-8'),
+                ref=ref.decode('utf-8')).encode('utf-8')
+            card_title = 'Sefaria - {}'.format(ref)
+        else:
+            speech_text = text
+            card_title = 'Sefaria'
+        card_text = (text[:1997] + '...' if len(text) > 2000 else text)
+        return question(speech_text).simple_card(card_title, card_text)
+    else:
+        return _build_could_not_find_response(ref or 'the text')
+
+
 def _build_commentary_response(commentaries, ref):
     if commentaries:
         num_commentaries = len(commentaries)
