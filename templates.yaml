@@ -1,4 +1,4 @@
-launch: "Please name a book, chapter, and optionally a verse."
+launch: "Please name a book, chapter, and optionally a verse. For example, Deuteronomy chapter six verse four."
 error: "I'm sorry, I could not find {{ ref }}."
 commentary: "I found {{ number }} commentaries on {{ ref }}. Please select one by saying the number associated with it. {{ titles }}."
 commentary_reprompt: "Please select a commentary by saying a number between 1 and {{ number }}."
