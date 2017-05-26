@@ -68,6 +68,15 @@ def handle_commentary_intent(book, chapter, verse):
     return _commentary_request_helper(ref)
 
 
+@ask.intent('CommentaryRangeIntent')
+def handle_commentary_range_intent(book, chapter, start_verse, end_verse):
+    session.attributes['last_intent'] = 'CommentaryRangeIntent'
+    app.logger.info('CommentaryRangeIntent: %s %s %s',
+                    book, chapter, start_verse, end_verse)
+    ref = create_ref(book, chapter, start_verse, end_verse)
+    return _commentary_request_helper(ref)
+
+
 @ask.intent('CommentarySelectionIntent', convert={'commentary_number': int})
 def handle_commentary_selection_intent(commentary_number):
     session.attributes['last_intent'] = 'CommentarySelectionIntent'
