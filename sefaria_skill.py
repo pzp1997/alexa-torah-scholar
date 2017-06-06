@@ -112,7 +112,7 @@ def launched():
 
 @ask.session_ended
 def session_ended():
-    return '', 200
+    return '{}', 200
 
 
 def _text_request_helper(book, chapter, start_verse, end_verse):
