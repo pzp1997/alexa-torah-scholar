@@ -52,8 +52,6 @@ def handle_verse_extra_intent(extra_option):
     elif extra_option == 'commentary':
         ref = create_ref(*last_ref)
         return _commentary_request_helper(ref)
-    elif extra_option == 'no':
-        return statement('Okay.')
     else:
         speech_text = render_template('verse_extra_error')
         reprompt_text = render_template('verse_extra', ref='this verse')
@@ -98,6 +96,7 @@ def handle_commentary_selection_intent(commentary_number):
     return _build_text_response(text, ref)
 
 
+@ask.intent('AMAZON.NoIntent')
 @ask.intent('AMAZON.CancelIntent')
 @ask.intent('AMAZON.StopIntent')
 def handle_cancel_stop():
